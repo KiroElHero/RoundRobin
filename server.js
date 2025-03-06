@@ -7,7 +7,7 @@ const PORT = 3000;
 
 let currentIndex = 0;
 // Connect to MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/UnixDB")
+mongoose.connect("mongodb+srv://root:root@cluster0.cwmh7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Could not connect to MongoDB", err));
 
