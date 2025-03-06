@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const TeamMember = require("./schemas/teamMemberSchema"); // Import your Mongoose model
 
 const app = express();
-const PORT = 3000;
+const PORT = 8000;
 
 let currentIndex = 0;
 // Connect to MongoDB
@@ -160,4 +160,4 @@ app.post("/shuffle-members", async (req, res) => {
 
 
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+app.listen(8000, () => console.log("Server running on port 3000"));
