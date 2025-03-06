@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Team Members</title>
+    <script src="/socket.io/socket.io.js"></script>
     <style>
       table {
         width: 100%;
@@ -45,27 +46,25 @@
     </table>
 
     <script>
+      const socket = io();
+
+      // Update UI when receiving real-time updates
+      socket.on("updateTeam", (members) => {
+        console.log("Real-time update received!");
+        updateTable(members);
+      });
+
+      socket.on("updateTurn", (member) => {
+        document.getElementById("current-turn").textContent = member
+          ? `${member.first_name} ${member.last_name}`
+          : "No active turn";
+      });
+
       async function fetchTeamMembers() {
         try {
           const response = await fetch("/team-members");
           const members = await response.json();
-          const tableBody = document.getElementById("team-members-body");
-          tableBody.innerHTML = ""; // Clear old data
-
-          members.forEach((member) => {
-            const row = document.createElement("tr");
-
-            row.innerHTML = `
-                    <td>${member.last_name}</td>
-                    <td>${member.cases_taken}</td>
-                    <td>${member.cases_moved}</td>
-                    <td>
-                        <button onclick="moveCase('${member._id}')">Move Case</button>
-                    </td>
-                `;
-
-            tableBody.appendChild(row);
-          });
+          updateTable(members);
         } catch (error) {
           console.error("Error fetching team members:", error);
         }
@@ -86,8 +85,6 @@
       async function nextTurn() {
         try {
           await fetch("/next-turn", { method: "POST" });
-          fetchCurrentTurn();
-          fetchTeamMembers(); // Refresh table
         } catch (error) {
           console.error("Error updating turn:", error);
         }
@@ -96,7 +93,6 @@
       async function skipTurn() {
         try {
           await fetch("/skip-turn", { method: "POST" });
-          fetchCurrentTurn();
         } catch (error) {
           console.error("Error skipping turn:", error);
         }
@@ -105,17 +101,6 @@
       async function shuffleMembers() {
         try {
           await fetch("/shuffle-members", { method: "POST" });
-          fetchTeamMembers(); // Refresh table to show shuffled order
-        } catch (error) {
-          console.error("Error shuffling members:", error);
-        }
-      }
-
-      async function shuffleMembers() {
-        try {
-          await fetch("/shuffle-members", { method: "POST" });
-          fetchTeamMembers(); // Refresh table
-          fetchCurrentTurn();
         } catch (error) {
           console.error("Error shuffling members:", error);
         }
@@ -130,22 +115,36 @@
 
           if (data.message === "No cases to move") {
             alert("No cases to move for this member.");
-          } else {
-            fetchTeamMembers(); // Refresh table
           }
         } catch (error) {
           console.error("Error moving case:", error);
         }
       }
+
       async function resetCases() {
         try {
           const response = await fetch("/reset-cases", { method: "POST" });
           const data = await response.json();
           alert(data.message); // Show confirmation message
-          location.reload();
         } catch (error) {
           console.error("Error resetting cases:", error);
         }
+      }
+
+      function updateTable(members) {
+        const tableBody = document.getElementById("team-members-body");
+        tableBody.innerHTML = ""; // Clear old data
+
+        members.forEach((member) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                    <td>${member.last_name}</td>
+                    <td>${member.cases_taken}</td>
+                    <td>${member.cases_moved}</td>
+                    <td><button onclick="moveCase('${member._id}')">Move Case</button></td>
+                `;
+          tableBody.appendChild(row);
+        });
       }
 
       // Load data on page load
