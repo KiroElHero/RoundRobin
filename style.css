@@ -1,0 +1,169 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Light gray background */
+    color: #333; /* Dark gray text */
+    text-align: center;
+    padding: 20px;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff; /* White background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    height: 50px;
+    margin-right: 15px;
+}
+
+/* Main Content */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Left Panel */
+.left-panel {
+    flex: 1;
+    margin-right: 20px;
+}
+
+/* Right Panel */
+.right-panel {
+    flex: 1;
+    margin-left: 20px;
+    text-align: left;
+}
+
+/* Input Section */
+.input-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 10px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+/* Buttons */
+button {
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-btn {
+    background-color: #0078d4; /* Commvault blue */
+    color: #ffffff;
+}
+
+.add-btn:hover {
+    background-color: #005a9e; /* Darker blue */
+}
+
+.primary-btn {
+    background-color: #28a745; /* Green */
+    color: #ffffff;
+}
+
+.primary-btn:hover {
+    background-color: #218838; /* Darker green */
+}
+
+.secondary-btn {
+    background-color: #dc3545; /* Red */
+    color: #ffffff;
+}
+
+.secondary-btn:hover {
+    background-color: #c82333; /* Darker red */
+}
+
+/* Name List */
+.name-list {
+    margin-top: 20px;
+}
+
+/* Name Item */
+.name-item {
+    background-color: #f8f9fa; /* Light gray */
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Name Details */
+.name-details {
+    display: flex;
+    align-items: center;
+}
+
+/* Name Actions */
+.name-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Badge Styling */
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #ffffff;
+    border-radius: 12px;
+    margin-right: 5px;
+}
+
+.cases-taken-badge {
+    background-color: #61155d; /* Commvault blue */
+}
+
+.cases-moved-badge {
+    background-color: #000000; /* Black */
+}
+
+/* Move Button */
+.move-btn {
+    background-color: #17a2b8; /* Teal */
+}
+
+.move-btn:hover {
+    background-color: #138496; /* Darker teal */
+}
+
+/* Delete Button */
+.delete-btn {
+    background-color: #6c757d; /* Gray */
+}
+
+.delete-btn:hover {
+    background-color: #5a6268; /* Darker gray */
+}
